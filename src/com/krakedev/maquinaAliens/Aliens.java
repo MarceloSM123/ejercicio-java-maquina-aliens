@@ -60,13 +60,13 @@ public class Aliens {
     
 	public void imprimir() {
 	    String mensaje = "Tamanio: " + tamanio
-	            + "Color: " + color
-	            + "Nro ojos: " + numeroOjos
-	            + "Nro brazos: " + numeroBrazos
-	            + "Nro pies: " + numeroPies
-	            + "Precio extremidad: " + precioExtremidad
-	            + "Precio ojo: " + precioOjo
-	            + "Precio cuerpo: " + precioCuerpo;
+	            + "\n Color: " + color
+	            + "\n Nro ojos: " + numeroOjos
+	            + "\n Nro brazos: " + numeroBrazos
+	            + "\n Nro pies: " + numeroPies
+	            + "\n Precio extremidad: " + precioExtremidad
+	            + "\n Precio ojo: " + precioOjo
+	            + "\n Precio cuerpo: " + precioCuerpo;
 
 	    System.out.println(mensaje);
 	}
