@@ -10,6 +10,11 @@ public class Aliens {
 	private double precioExtremidad;
 	private double precioOjo;
 	private double precioCuerpo;
+	private double precioTotal = 0;
+
+	public double getPrecioTotal() {
+		return precioTotal;
+	}
 
 	public Aliens(int tamanio, String color) {
 		if (tamanio < 5) {
@@ -24,6 +29,8 @@ public class Aliens {
 		this.precioCuerpo = 0.2 * this.tamanio;
 		this.precioExtremidad = 0.1 * this.tamanio;
 		this.precioOjo = 0.05 * this.tamanio;
+		
+		calcularPrecioTotal();
 	}
 
 	public int getTamanio() {
@@ -75,45 +82,62 @@ public class Aliens {
 	}
 
 	public boolean agregarBrazos(int brazosNuevos) {
-		 int extremidades = numeroBrazos+numeroPies;
-		 if(sumarExtremidades(brazosNuevos)>=10) {
-			 return false;
-		 }else {
-			 this.numeroBrazos+=brazosNuevos;
-			 return true;
-		 }}
+		int extremidades = numeroBrazos + numeroPies;
+		if (sumarExtremidades(brazosNuevos) >= 10) {
+			calcularPrecioTotal();
+			return false;
+		} else {
+			this.numeroBrazos += brazosNuevos;
+			calcularPrecioTotal();
+			return true;
+		}
+		
+	}
 
 	public boolean agregarPies(int piesNuevos) {
 		int extremidades = numeroBrazos + numeroPies;
 		if (sumarExtremidades(piesNuevos) >= 10) {
+			calcularPrecioTotal();
 			return false;
 		} else {
 			this.numeroPies += piesNuevos;
+			calcularPrecioTotal();
 			return true;
 		}
-
+		
 	}
-	
+
 	private boolean validarNumeroOjos(int limiteOjos, int ojosNuevos) {
-		if(numeroOjos+ojosNuevos<=limiteOjos) {
-			this.numeroOjos+=ojosNuevos;
+		if (numeroOjos + ojosNuevos <= limiteOjos) {
+			this.numeroOjos += ojosNuevos;
+			calcularPrecioTotal();
 			return true;
 		}
 		return false;
-		
+
 	}
-	
+
 	public boolean agregarOjos(int ojosNuevos) {
-		if(tamanio<=10) {
-			return validarNumeroOjos(3,ojosNuevos);
+		if (tamanio <= 10) {
+			
+			return validarNumeroOjos(3, ojosNuevos);
+			
+		}
+
+		else if (tamanio > 10 && tamanio <= 20) {
+			
+			return validarNumeroOjos(5, ojosNuevos);
+		} else {
+			
+			return validarNumeroOjos(7, ojosNuevos);
 		}
 		
-		else if(tamanio>10 && tamanio<=20) {
-			return validarNumeroOjos(5,ojosNuevos);
-		}
-		else {
-			return validarNumeroOjos(7,ojosNuevos);
-		}
-		
+
+	}
+
+	public void calcularPrecioTotal() {
+		double extremidades = (numeroBrazos + numeroPies) * precioExtremidad;
+		double ojos = numeroOjos * precioOjo;
+		this.precioTotal = precioCuerpo + extremidades + ojos;
 	}
 }
